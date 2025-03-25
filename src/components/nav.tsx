@@ -12,7 +12,7 @@ const Nav = () => {
             rel="noreferrer"
             target="_blank"
           >
-            Cogni<span className="text-blue-500">Flow</span>
+            Cogni<span className="text-2xl font-black text-success">Flow</span>
           </a>
         </div>
         <div className="grid-flow-col gap-2 md:place-self-center md:justify-self-end mr-4 font-serif">

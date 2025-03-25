@@ -3,19 +3,31 @@
 @tailwind utilities;
 
 .btn-grad {
-    @apply bg-gradient-to-r from-teal-200 to-lime-200 text-black;
+  @apply bg-gradient-to-r from-blue-500 to-teal-400 text-white font-semibold rounded-lg;
 }
 
-.bg-stripe {
-    background: #222 repeating-linear-gradient(
-            to bottom,
-            transparent 7px,
-            rgba(0, 0, 0, 0.8) 9px,
-            rgba(0, 0, 0, 0.8) 13px,
-            transparent 13px
-    );
+.input-group {
+  @apply flex gap-2 mt-4;
 }
 
-.mermaid svg{
-    margin: 0 auto!important;
+input:focus {
+  outline: none;
+}
+
+html,
+body {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background-color: #111827;
+}
+
+.mermaid svg {
+  margin: 0 auto !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
