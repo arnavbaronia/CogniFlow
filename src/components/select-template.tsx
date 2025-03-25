@@ -14,7 +14,6 @@ export const templates: ITemplate[] = [
   { label: "Entity Relationship", value: TemplateEnum.ENTITYRELATIONSHIP },
   { label: "Sequence Diagram", value: TemplateEnum.SEQUENCE },
   { label: "State Diagram", value: TemplateEnum.STATE },
-  // { label: "Class Diagram", value: TemplateEnum.CLASS }, // FIXME: syntax mistake is pretty common for this
 ];
 
 interface ISelectTemplate {

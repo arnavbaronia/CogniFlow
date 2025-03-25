@@ -1,8 +1,5 @@
 import { ChatOpenAI } from "@langchain/openai";
 import { LLMChain } from "langchain/chains";
-// import { PromptTemplate } from "langchain/prompts";  // This might still work, but if not, try the alternative below
-
-// Alternative import if the above doesn't work:
 import { PromptTemplate } from "@langchain/core/prompts";
 
 export const generate = async ({
@@ -14,7 +11,7 @@ export const generate = async ({
 }) => {
   try {
     const model = new ChatOpenAI({
-      modelName: "gpt-3.5-turbo", // Or "gpt-4"
+      modelName: "gpt-3.5-turbo",
       temperature: 0.9,
       openAIApiKey: process.env.OPENAI_API_KEY,
     });
@@ -29,7 +26,6 @@ export const generate = async ({
 
     const chain = new LLMChain({ llm: model, prompt });
 
-    // Dynamically import the syntax doc
     const syntaxDoc = await import(
       `@/lib/syntax/${selectedTemplate.toLowerCase()}.md`
     );

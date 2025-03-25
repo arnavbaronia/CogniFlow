@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { ChatOpenAI } from "@langchain/openai";  // Updated import path
+import { ChatOpenAI } from "@langchain/openai"; 
 import { sanitizeText } from "@/lib/helpers";
 import { promptByTemplate, TemplateEnum } from "@/lib/prompt-by-template";
 import { generate } from "@/lib/generate";
@@ -23,7 +23,6 @@ export default async function handler(
   try {
     const ans = await generate({ input, selectedTemplate });
 
-    // Clean up the response
     const text = ans.text
       .replaceAll("```", "")
       .replaceAll(`"`, `'`)
