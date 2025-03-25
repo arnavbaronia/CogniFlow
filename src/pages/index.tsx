@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Mermaid } from "@/components/mermaid";
-import SelectTemplate from "@/components/select-template";
+import SelectTemplate, { templates } from "@/components/select-template";
 import { TemplateEnum } from "@/lib/prompt-by-template";
 import Nav from "@/components/nav";
 
@@ -9,7 +9,7 @@ const Index = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
-  const [selectedTemplate, setSelectedTemplate] = useState<string>(
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateEnum>(
     TemplateEnum.FLOWCHART
   );
 
@@ -30,14 +30,19 @@ const Index = () => {
       if (res.data.text) {
         setChart(res.data.text);
       } else {
-        setError("Sorry! A small issue occurred.");
+        setError("Sorry! An issue occurred.");
       }
     } catch (e) {
       console.log(e);
-      setError("Sorry! A small issue occurred.");
+      setError("Sorry! An issue occurred.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const getTemplateDisplayName = () => {
+    const template = templates.find(t => t.value === selectedTemplate);
+    return template ? template.label : "Flowchart";
   };
 
   return (
@@ -57,7 +62,7 @@ const Index = () => {
               <div className="flex flex-col justify-center text-gray-100">
                 <h1 className="text-7xl font-black text-blue-400">Generate</h1>
                 <h3 className="text-8xl font-black text-teal-400">
-                  Flowchart
+                  {getTemplateDisplayName()}
                 </h3>
                 <h2 className="text-5xl font-black text-gray-400">with AI</h2>
               </div>
@@ -66,15 +71,15 @@ const Index = () => {
         )}
       </div>
 
-      <div className="flex">
-        <form onSubmit={handleFlow} className="form-control">
+      <div className="flex w-full max-w-2xl px-4">
+        <form onSubmit={handleFlow} className="form-control w-full">
           <div className="input-group">
             <input
-              className="input input-lg input-bordered w-96 bg-gray-800 text-gray-200 placeholder-gray-500 focus:border-blue-400"
+              className="input input-lg input-bordered w-full bg-gray-800 text-gray-200 placeholder-gray-500 focus:border-blue-400"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               type="text"
-              placeholder="What the flowchart is about"
+              placeholder="What the diagram is about"
               autoFocus
             />
             <button
@@ -83,11 +88,12 @@ const Index = () => {
                 loading ? "loading" : ""
               } hover:bg-gradient-to-r hover:from-blue-400 hover:to-teal-400`}
             >
-              {error ? "Retry" : `Generate ${selectedTemplate}`}
+              {error ? "Retry" : `Generate ${getTemplateDisplayName()}`}
             </button>
           </div>
           <SelectTemplate
-            onChange={(e) => setSelectedTemplate(e.target.value)}
+            value={selectedTemplate}
+            onChange={setSelectedTemplate}
           />
         </form>
       </div>

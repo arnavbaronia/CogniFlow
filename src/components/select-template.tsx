@@ -17,14 +17,19 @@ export const templates: ITemplate[] = [
 ];
 
 interface ISelectTemplate {
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  value: TemplateEnum;
+  onChange: (value: TemplateEnum) => void;
 }
 
-const SelectTemplate: FunctionComponent<ISelectTemplate> = ({ onChange }) => {
+const SelectTemplate: FunctionComponent<ISelectTemplate> = ({ value, onChange }) => {
   return (
-    <select onChange={onChange} className="select select-bordered select-lg">
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value as TemplateEnum)}
+      className="select select-bordered select-lg w-full mt-2"
+    >
       {templates.map((item) => (
-        <option value={item.value} key={item.label}>
+        <option value={item.value} key={item.value}>
           {item.label}
         </option>
       ))}
